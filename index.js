@@ -48,6 +48,17 @@ app.get("/", (req, res) => {
   res.send("MongoDB Atlas is connected!");
 });
 
+if (!process.env.TWILIO_ACCOUNT_SID || !process.env.TWILIO_AUTH_TOKEN) {
+  throw new Error("❌ Twilio credentials are missing. Please set TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN in your .env file.");
+}
+
+// Initialize Twilio client
+const client = twilio(
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_AUTH_TOKEN
+);
+
+module.exports = client;
 // // database connection 
 // mongoose.connect("mongodb://localhost:27017/nutrify")
 // .then(()=>{
