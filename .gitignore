@@ -1,0 +1,42 @@
+# Ignore .env file containing sensitive data
+.env
+
+# Node.js specific
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# IDE or editor specific files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Logs
+*.log
+
+# Build directories
+/dist/
+/build/
+out/
+
+# Dependency directories
+bower_components/
+
+# .envrc files (if you use direnv)
+.envrc
+
+# Python specific
+__pycache__/
+*.pyc
+*.pyo
+
+# Ruby specific
+*.gem
+*.bundle
+log/
+tmp/
