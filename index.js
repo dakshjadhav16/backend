@@ -30,6 +30,11 @@ const CaloriesData = require('./models/CaloriesData');
 
 const PORT = process.env.PORT || 8000;
 
+// Import dependencies
+
+
+const PORT = process.env.PORT || 8000;
+
 
 const app = express();
 app.use(express.json({ limit: '10mb' })); // Set the limit to 10MB
@@ -38,6 +43,23 @@ app.use(cors());
 const storage = multer.memoryStorage(); // Store files in memory
 const upload = multer({ storage, limits: { fileSize: 10 * 1024 * 1024 } });
 
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ Connected to MongoDB Atlas 🚀"))
+  .catch(err => console.error("❌ MongoDB Connection Error:", err));
+
+
+app.get("/", (req, res) => {
+  res.send("MongoDB Atlas is connected!");
+});
+
+// // database connection 
+// mongoose.connect("mongodb://localhost:27017/nutrify")
+// .then(()=>{
+//     console.log("Database connection successfull")
+// })
+// .catch((err)=>{
+//     console.log(err);
+// })
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ Connected to MongoDB Atlas 🚀"))
   .catch(err => console.error("❌ MongoDB Connection Error:", err));
