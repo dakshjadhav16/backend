@@ -25,6 +25,11 @@ const User = require('./models/ProfileModel');
 const UserinfoModel=require('./models/UserInfoModel');
 const CaloriesData = require('./models/CaloriesData'); 
 
+// Import dependencies
+
+
+const PORT = process.env.PORT || 8000;
+
 
 const app = express();
 app.use(express.json({ limit: '10mb' })); // Set the limit to 10MB
@@ -33,14 +38,23 @@ app.use(cors());
 const storage = multer.memoryStorage(); // Store files in memory
 const upload = multer({ storage, limits: { fileSize: 10 * 1024 * 1024 } });
 
-// database connection 
-mongoose.connect("mongodb://localhost:27017/nutrify")
-.then(()=>{
-    console.log("Database connection successfull")
-})
-.catch((err)=>{
-    console.log(err);
-})
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ Connected to MongoDB Atlas 🚀"))
+  .catch(err => console.error("❌ MongoDB Connection Error:", err));
+
+
+app.get("/", (req, res) => {
+  res.send("MongoDB Atlas is connected!");
+});
+
+// // database connection 
+// mongoose.connect("mongodb://localhost:27017/nutrify")
+// .then(()=>{
+//     console.log("Database connection successfull")
+// })
+// .catch((err)=>{
+//     console.log(err);
+// })
 cron.schedule('0 7 * * *', () => {
   console.log('Running daily report job');
   generateDailyReport();
@@ -678,9 +692,15 @@ app.get('/posts', verifyToken, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-app.listen(8000,()=>{
-    console.log("Server is up and running");
-})
+
+// Start server
+
+app.listen(PORT, () => {
+    console.log(`🚀 Server is running on port ${PORT}`);
+});
+// app.listen(8000,()=>{
+//     console.log("Server is up and running");
+// })
 /*app.post("/physical_info", verifyToken, async (req, res) => {
     const phyData = req.body;
 
