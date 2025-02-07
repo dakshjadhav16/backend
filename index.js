@@ -56,14 +56,7 @@ app.get("/", (req, res) => {
 // .catch((err)=>{
 //     console.log(err);
 // })
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ Connected to MongoDB Atlas 🚀"))
-  .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
-
-app.get("/", (req, res) => {
-  res.send("MongoDB Atlas is connected!");
-});
 
 // // database connection 
 // mongoose.connect("mongodb://localhost:27017/nutrify")
