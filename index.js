@@ -30,10 +30,6 @@ const CaloriesData = require('./models/CaloriesData');
 
 const PORT = process.env.PORT || 8000;
 
-// Import dependencies
-
-
-const PORT = process.env.PORT || 8000;
 
 
 const app = express();
