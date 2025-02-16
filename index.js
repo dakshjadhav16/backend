@@ -271,8 +271,8 @@ app.post('/register/generate-otp', async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: EMAIL_USER, // Use email from .env
-        pass: EMAIL_PASS // Use app-specific password from .env
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
       },
       tls: {
         rejectUnauthorized: false,
