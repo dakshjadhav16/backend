@@ -23,7 +23,7 @@ const verifyToken = require("./verifyToken")
 const WaterIntake=require("./models/waterModel")
 const User = require('./models/ProfileModel');
 const UserinfoModel=require('./models/UserInfoModel');
-const CaloriesData = require('./models/CaloriesData'); 
+const CaloriesData = require('./models/caloriesData'); 
 
 // Import dependencies
 
