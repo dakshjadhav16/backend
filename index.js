@@ -280,7 +280,7 @@ app.post('/register/generate-otp', async (req, res) => {
     });
 
     const mailOptions = {
-      from:  EMAIL_USER, // Use email from .env
+      from:  process.env.EMAIL_USER, // Use email from .env
      
       to: email,
       subject: 'Your OTP Code',
