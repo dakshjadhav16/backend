@@ -437,27 +437,25 @@ app.post("/track",verifyToken,async (req,res)=>{
 })
 // endpoint to fetch all foods eaten by a person 
 
-app.get("/track/:userid/:date",async (req,res)=>{
+app.get("/track/:userid/:date", async (req, res) => {
+  let userid = req.params.userid;
+  let date = new Date(req.params.date);
 
-    let userid = req.params.userid;
-    let date = new Date(req.params.date);
-    let strDate = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
+  // Ensure the date format matches how it is stored in the DB
+  let strDate = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear(); // MM/DD/YYYY
 
-    try
-    {
+  try {
+      let foods = await trackingModel.find({ userId: userid, eatenDate: strDate })
+          .populate('userId')
+          .populate('foodId');
 
-        let foods = await trackingModel.find({userId:userid,eatenDate:strDate}).populate('userId').populate('foodId')
-        res.send(foods);
+      res.send(foods);
+  } catch (err) {
+      console.log(err);
+      res.status(500).send({ message: "Some Problem in getting the food" });
+  }
+});
 
-    }
-    catch(err)
-    {
-        console.log(err);
-        res.status(500).send({message:"Some Problem in getting the food"})
-    }
-
-
-})
     app.get('/user/:userId/posts', async (req, res) => {
       const { userId } = req.params; // This should be the user ID
       try {
