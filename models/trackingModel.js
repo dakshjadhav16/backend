@@ -12,7 +12,6 @@ const trackingSchema = mongoose.Schema({
     },
     foodId: {
         type: String,
-        // ref: 'foods',
         required: true
     },
     details: {
@@ -26,7 +25,7 @@ const trackingSchema = mongoose.Schema({
         type: String,
         default: () => {
             const now = new Date();
-            return `${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')}/${now.getFullYear()}`;
+            return `${now.getMonth() + 1}/${now.getDate()}/${now.getFullYear()}`;
         }
     },
     quantity: {
